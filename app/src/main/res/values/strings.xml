@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mp3ZingProject</string>
+    <string name="homepage_title">Trang chủ</string>
+    <string name="search_title">Tìm kiếm</string>
+    <string name="title_song">DAY LA TITLE BAI HAT</string>
+    <string name="description_song_banner">Chao ban den voi ca khuc moi cua ca si hot nhat hien nay</string>
+    <string name="playlist_name_template">Playlist name temple</string>
+    <string name="title_playlist">NHỊP ĐIỆU CẢM XÚC</string>
+    <string name="title_loadmore_playlist">Xem thêm playlist</string>
+    <string name="subject_and_kind_title">CHỦ ĐỀ VÀ THỂ LOẠI</string>
+    <string name="loadmore_title_subject_and_kind">Xem thêm</string>
+    <string name="album_hot_title">ALBUM HOT</string>
+</resources>

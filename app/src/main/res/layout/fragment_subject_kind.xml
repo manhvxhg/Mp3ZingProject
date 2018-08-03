@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/subject_and_kind_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            android:textColor="@color/colorDark"
+            android:id="@+id/subject_and_kind_title"
+            android:text="@string/subject_and_kind_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+        <TextView
+            android:id="@+id/loadmore_subject_and_kind_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/loadmore_title_subject_and_kind"
+            android:textColor="@color/colorTint"
+            android:textSize="@dimen/sp_18"
+            android:layout_marginRight="@dimen/dp_10"
+            />
+    </RelativeLayout>
+    <HorizontalScrollView
+        android:id="@+id/subject_and_kind_horizontal_scrollview"
+        android:scrollbars="none"
+        android:layout_below="@id/subject_and_kind_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></HorizontalScrollView>
+</RelativeLayout>
