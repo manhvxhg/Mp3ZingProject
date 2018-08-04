@@ -19,6 +19,9 @@
             android:background="@mipmap/ic_launcher"
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+
+
+
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <View
@@ -31,7 +34,7 @@
                 android:elevation="@dimen/dp_6"
                 android:id="@+id/list_song_toolbar"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ToolbarStyle"
                 ></android.support.v7.widget.Toolbar>
             <ImageView
                 android:id="@+id/list_song_imageview"
