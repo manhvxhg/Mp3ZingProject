@@ -11,4 +11,7 @@
     <color name="colorSilver">#c9c7c7</color>
     <color name="colorTint">#913677</color>
     <color name="colorSingerName">#9e9797</color>
+    <color name="color_text_song_hot">#363636</color>
+    <color name="color_single_text_song_hot">#8a8c8c</color>
+    <color name="colorFloatingButton">#a845de</color>
 </resources>

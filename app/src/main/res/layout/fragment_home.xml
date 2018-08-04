@@ -30,5 +30,10 @@
             android:id="@+id/fragment_album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.manhnd16.mp3zingproject.fragment.SongHotFragment"
+            android:id="@+id/fragment_song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </ScrollView>

@@ -4,6 +4,7 @@ import com.example.manhnd16.mp3zingproject.model.Advertisement;
 import com.example.manhnd16.mp3zingproject.model.Album;
 import com.example.manhnd16.mp3zingproject.model.KindAndSubject;
 import com.example.manhnd16.mp3zingproject.model.PlayList;
+import com.example.manhnd16.mp3zingproject.model.Song;
 
 import java.util.List;
 
@@ -26,4 +27,7 @@ public interface ServiceListener {
 
     @GET("album.php")
     Call<List<Album>> getAlbum();
+
+    @GET("song.php")
+    Call<List<Song>> getSong();
 }

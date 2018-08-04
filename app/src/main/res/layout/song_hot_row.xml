@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/image_song_hot_imageview"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:scaleType="fitXY"
+        android:layout_margin="@dimen/dp_2"
+        />
+    <TextView
+        android:text="TEN BAI HAT"
+        android:layout_toRightOf="@id/image_song_hot_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_song_hot_textview"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="@dimen/sp_18"
+        android:textColor="@color/color_text_song_hot"
+        />
+    <TextView
+        android:text="Ten ca si"
+        android:id="@+id/singer_name_song_hot_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/sp_18"
+        android:textColor="@color/color_single_text_song_hot"
+        android:layout_below="@id/name_song_hot_textview"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_toRightOf="@id/image_song_hot_imageview"
+        />
+    <ImageView
+        android:src="@drawable/iconlove"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        android:id="@+id/favourite_imageview"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30" />
+</RelativeLayout>
