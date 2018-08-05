@@ -1,18 +1,23 @@
 package com.example.manhnd16.mp3zingproject.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.manhnd16.mp3zingproject.R;
+import com.example.manhnd16.mp3zingproject.activity.ListSongActivity;
 import com.example.manhnd16.mp3zingproject.adapter.PlaylistAdapter;
+import com.example.manhnd16.mp3zingproject.constant.Constant;
 import com.example.manhnd16.mp3zingproject.model.PlayList;
 import com.example.manhnd16.mp3zingproject.service.ApiService;
 import com.example.manhnd16.mp3zingproject.service.ServiceListener;
@@ -54,11 +59,20 @@ public class PlaylistFragment extends Fragment {
             callBack.enqueue(new Callback<List<PlayList>>() {
                 @Override
                 public void onResponse(Call<List<PlayList>> call, Response<List<PlayList>> response) {
-                    ArrayList<PlayList> playListArrayList = (ArrayList<PlayList>) response.body();
+                    final ArrayList<PlayList> playListArrayList = (ArrayList<PlayList>) response.body();
                     if (playListArrayList != null) {
                         mAdapter = new PlaylistAdapter(getActivity(), R.layout.playlist_row, playListArrayList);
                         mListView.setAdapter(mAdapter);
                         setListViewHeightBasedOnChildren(mListView);
+                        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                                Intent intent = new Intent(getActivity(), ListSongActivity.class);
+                                Toast.makeText(getActivity(), "ABCABC", Toast.LENGTH_SHORT).show();
+                                intent.putExtra(Constant.INTENT_NAME_PLAYLIST, playListArrayList.get(position));
+                                startActivity(intent);
+                            }
+                        });
                     }
                 }
                 @Override
@@ -92,4 +106,5 @@ public class PlaylistFragment extends Fragment {
         listView.setLayoutParams(params);
         listView.requestLayout();
     }
+
 }

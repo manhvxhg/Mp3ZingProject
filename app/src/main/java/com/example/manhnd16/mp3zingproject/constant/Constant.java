@@ -4,4 +4,5 @@ public class Constant {
 
     // Intent name banner
     public static final String INTENT_NAME_BANNER = "banner";
+    public static final String INTENT_NAME_PLAYLIST = "playlist";
 }

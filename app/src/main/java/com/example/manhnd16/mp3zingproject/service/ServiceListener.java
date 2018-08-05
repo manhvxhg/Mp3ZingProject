@@ -36,5 +36,10 @@ public interface ServiceListener {
 
     @FormUrlEncoded
     @POST("listsongads.php")
-    Call<List<Song>> getListSongByAds(@Field("idAds") String idAds);
+    Call<List<Song>> getListSong(@Field("idAds") String idAds);
+
+    @FormUrlEncoded
+    @POST("listsongads.php")
+    Call<List<Song>> getListSongByPlaylist(@Field("idPlaylist") String idPlaylist);
+
 }

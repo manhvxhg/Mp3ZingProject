@@ -3,11 +3,13 @@ package com.example.manhnd16.mp3zingproject.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by mac on 7/16/18.
  */
 
-public class PlayList {
+public class PlayList implements Serializable {
 
     @SerializedName("playlist_id")
     @Expose
