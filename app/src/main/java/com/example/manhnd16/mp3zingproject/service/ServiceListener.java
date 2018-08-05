@@ -9,7 +9,10 @@ import com.example.manhnd16.mp3zingproject.model.Song;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 /**
  * Created by mac on 7/1/18.
@@ -30,4 +33,13 @@ public interface ServiceListener {
 
     @GET("song.php")
     Call<List<Song>> getSong();
+
+    @FormUrlEncoded
+    @POST("listsongads.php")
+    Call<List<Song>> getListSong(@Field("idAds") String idAds);
+
+    @FormUrlEncoded
+    @POST("listsongads.php")
+    Call<List<Song>> getListSongByPlaylist(@Field("idPlaylist") String idPlaylist);
+
 }

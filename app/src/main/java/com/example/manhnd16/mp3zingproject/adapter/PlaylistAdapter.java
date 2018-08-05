@@ -22,14 +22,22 @@ import java.util.List;
 
 public class PlaylistAdapter extends ArrayAdapter<PlayList> {
     private Context mContext;
+    private List<PlayList> mPlayListArrayList;
 
     public PlaylistAdapter(@NonNull Context context, int resource, @NonNull List<PlayList> objects) {
         super(context, resource, objects);
         mContext = context;
+        mPlayListArrayList = objects;
     }
     class PlaylistViewHolder {
         TextView txtPlaylistName;
         ImageView imgBackground, imgIcon;
+    }
+
+    @Nullable
+    @Override
+    public PlayList getItem(int position) {
+        return mPlayListArrayList.get(position);
     }
 
     @NonNull
