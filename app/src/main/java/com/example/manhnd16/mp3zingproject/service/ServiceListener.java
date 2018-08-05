@@ -42,4 +42,6 @@ public interface ServiceListener {
     @POST("listsongads.php")
     Call<List<Song>> getListSongByPlaylist(@Field("idPlaylist") String idPlaylist);
 
+    @GET("allplaylist.php")
+    Call<List<PlayList>> getDataAllPlaylist();
 }

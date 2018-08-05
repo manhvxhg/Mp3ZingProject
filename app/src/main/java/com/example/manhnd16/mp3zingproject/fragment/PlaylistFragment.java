@@ -12,14 +12,15 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.manhnd16.mp3zingproject.R;
 import com.example.manhnd16.mp3zingproject.activity.ListSongActivity;
+import com.example.manhnd16.mp3zingproject.activity.ViewAllPlaylistActivity;
 import com.example.manhnd16.mp3zingproject.adapter.PlaylistAdapter;
 import com.example.manhnd16.mp3zingproject.constant.Constant;
 import com.example.manhnd16.mp3zingproject.model.PlayList;
 import com.example.manhnd16.mp3zingproject.service.ApiService;
+import com.example.manhnd16.mp3zingproject.service.LoadingDisplay;
 import com.example.manhnd16.mp3zingproject.service.ServiceListener;
 
 import java.util.ArrayList;
@@ -33,12 +34,12 @@ import retrofit2.Response;
  * Created by mac on 7/17/18.
  */
 
-public class PlaylistFragment extends Fragment {
+public class PlaylistFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
     private View mView;
     private ListView mListView;
     private TextView mTitlePlaylist, mLoadmorePlaylist;
     private PlaylistAdapter mAdapter;
-
+    private ArrayList<PlayList> mPlayListArrayList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +48,8 @@ public class PlaylistFragment extends Fragment {
         mTitlePlaylist = mView.findViewById(R.id.txt_title_playlist);
         mLoadmorePlaylist = mView.findViewById(R.id.loadmore_playlist_textview);
         getData();
+        mListView.setOnItemClickListener(this);
+        mLoadmorePlaylist.setOnClickListener(this);
         return mView;
     }
 
@@ -56,23 +59,15 @@ public class PlaylistFragment extends Fragment {
         private void getData() {
             ServiceListener serviceListener = ApiService.getService();
             Call<List<PlayList>> callBack = serviceListener.getDataPlaylist();
+            beforeCallApi();
             callBack.enqueue(new Callback<List<PlayList>>() {
                 @Override
                 public void onResponse(Call<List<PlayList>> call, Response<List<PlayList>> response) {
-                    final ArrayList<PlayList> playListArrayList = (ArrayList<PlayList>) response.body();
-                    if (playListArrayList != null) {
-                        mAdapter = new PlaylistAdapter(getActivity(), R.layout.playlist_row, playListArrayList);
+                    mPlayListArrayList = (ArrayList<PlayList>) response.body();
+                    if (mPlayListArrayList != null) {
+                        mAdapter = new PlaylistAdapter(getActivity(), R.layout.playlist_row, mPlayListArrayList);
                         mListView.setAdapter(mAdapter);
                         setListViewHeightBasedOnChildren(mListView);
-                        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                                Intent intent = new Intent(getActivity(), ListSongActivity.class);
-                                Toast.makeText(getActivity(), "ABCABC", Toast.LENGTH_SHORT).show();
-                                intent.putExtra(Constant.INTENT_NAME_PLAYLIST, playListArrayList.get(position));
-                                startActivity(intent);
-                            }
-                        });
                     }
                 }
                 @Override
@@ -107,4 +102,39 @@ public class PlaylistFragment extends Fragment {
         listView.requestLayout();
     }
 
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            Intent intent = new Intent(getActivity(), ListSongActivity.class);
+            intent.putExtra(Constant.INTENT_NAME_PLAYLIST, mPlayListArrayList.get(position));
+            startActivity(intent);
+        }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.loadmore_playlist_textview:
+                onClickLoadmorePlaylist();
+                break;
+        }
+    }
+
+    /**
+     * processing tap to view all playlist
+     */
+    private void onClickLoadmorePlaylist() {
+        Intent intent = new Intent(getActivity(), ViewAllPlaylistActivity.class);
+        startActivity(intent);
+    }
+
+    protected void beforeCallApi() {
+        if (getActivity() instanceof LoadingDisplay) {
+            ((LoadingDisplay) getActivity()).beforeCallApi();
+        }
+    }
+
+    protected void afterCallApi() {
+        if (getActivity() instanceof LoadingDisplay) {
+            ((LoadingDisplay) getActivity()).afterCallApi();
+        }
+    }
 }

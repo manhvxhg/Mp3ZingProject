@@ -33,7 +33,15 @@ public class PlaylistAdapter extends ArrayAdapter<PlayList> {
         TextView txtPlaylistName;
         ImageView imgBackground, imgIcon;
     }
+    class AllPlaylistViewHolder {
+        TextView txtPlaylistName, txtPlaylistVarious;
+        ImageView imgIcon;
+    }
 
+    @Override
+    public boolean isEnabled(int position) {
+        return true;
+    }
     @Nullable
     @Override
     public PlayList getItem(int position) {
@@ -44,21 +52,23 @@ public class PlaylistAdapter extends ArrayAdapter<PlayList> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         PlaylistViewHolder playlistViewHolder = null;
-        if (convertView == null) {
-            LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.playlist_row, null);
-            playlistViewHolder = new PlaylistViewHolder();
-            playlistViewHolder.txtPlaylistName = convertView.findViewById(R.id.playlist_name_textview);
-            playlistViewHolder.imgBackground = convertView.findViewById(R.id.playlist_background_imagebutton);
-            playlistViewHolder.imgIcon = convertView.findViewById(R.id.playlist_avatar_imageview);
-            convertView.setTag(playlistViewHolder);
-        } else {
-            playlistViewHolder = (PlaylistViewHolder) convertView.getTag();
-        }
-        PlayList playList = getItem(position);
-        Picasso.with(mContext).load(playList.getPlaylistImage()).into(playlistViewHolder.imgBackground);
-        Picasso.with(mContext).load(playList.getPlaylistIcon()).into(playlistViewHolder.imgIcon);
-        playlistViewHolder.txtPlaylistName.setText(playList.getPlaylistName());
+        AllPlaylistViewHolder allPlaylistViewHolder = null;
+            if (convertView == null) {
+                LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+                convertView = layoutInflater.inflate(R.layout.playlist_row, null);
+                playlistViewHolder = new PlaylistViewHolder();
+                playlistViewHolder.txtPlaylistName = convertView.findViewById(R.id.playlist_name_textview);
+                playlistViewHolder.imgBackground = convertView.findViewById(R.id.playlist_background_imagebutton);
+                playlistViewHolder.imgIcon = convertView.findViewById(R.id.playlist_avatar_imageview);
+                convertView.setTag(playlistViewHolder);
+            } else {
+                playlistViewHolder = (PlaylistViewHolder) convertView.getTag();
+            }
+            PlayList playList = getItem(position);
+            Picasso.with(mContext).load(playList.getPlaylistImage()).into(playlistViewHolder.imgBackground);
+            Picasso.with(mContext).load(playList.getPlaylistIcon()).into(playlistViewHolder.imgIcon);
+            playlistViewHolder.txtPlaylistName.setText(playList.getPlaylistName());
+
         return convertView;
     }
 }

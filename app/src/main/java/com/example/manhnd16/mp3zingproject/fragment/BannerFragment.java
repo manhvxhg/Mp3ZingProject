@@ -1,5 +1,7 @@
 package com.example.manhnd16.mp3zingproject.fragment;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.manhnd16.mp3zingproject.R;
+import com.example.manhnd16.mp3zingproject.activity.ViewAllPlaylistActivity;
 import com.example.manhnd16.mp3zingproject.adapter.BannerAdapter;
 import com.example.manhnd16.mp3zingproject.model.Advertisement;
 import com.example.manhnd16.mp3zingproject.service.ApiService;
@@ -56,6 +59,7 @@ public class BannerFragment extends Fragment {
     private void getData() {
         ServiceListener serviceListener = ApiService.getService();
         Call<List<Advertisement>> callBack = serviceListener.getDataBanner();
+
         callBack.enqueue(new Callback<List<Advertisement>>() {
             @Override
             public void onResponse(Call<List<Advertisement>> call, Response<List<Advertisement>> response) {
@@ -87,4 +91,5 @@ public class BannerFragment extends Fragment {
             }
         });
     }
+
 }

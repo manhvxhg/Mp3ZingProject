@@ -1,5 +1,7 @@
 package com.example.manhnd16.mp3zingproject.activity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,6 +50,7 @@ public class ListSongActivity extends AppCompatActivity {
     private ListSongAdapter mAdapter;
     private ImageView mListSongImage;
     private ArrayList<Song> mSongArrayList;
+    private ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +132,7 @@ public class ListSongActivity extends AppCompatActivity {
     private void getDataPlaylist(String playlistId) {
         ServiceListener serviceListener = ApiService.getService();
         Call<List<Song>> callback = serviceListener.getListSongByPlaylist(playlistId);
+        beforeCallApi(ListSongActivity.this);
         callback.enqueue(new Callback<List<Song>>() {
             @Override
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
@@ -136,6 +140,7 @@ public class ListSongActivity extends AppCompatActivity {
                 mAdapter = new ListSongAdapter(ListSongActivity.this, mSongArrayList);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
                 mRecyclerView.setAdapter(mAdapter);
+                afterCallApi();
             }
 
             @Override
@@ -152,6 +157,7 @@ public class ListSongActivity extends AppCompatActivity {
     private void getDataSongAds(String idAds) {
         ServiceListener serviceListener = ApiService.getService();
         Call<List<Song>> callback = serviceListener.getListSong(idAds);
+        beforeCallApi(ListSongActivity.this);
         callback.enqueue(new Callback<List<Song>>() {
             @Override
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
@@ -159,6 +165,7 @@ public class ListSongActivity extends AppCompatActivity {
                 mAdapter = new ListSongAdapter(ListSongActivity.this, mSongArrayList);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
                 mRecyclerView.setAdapter(mAdapter);
+                afterCallApi();
             }
 
             @Override
@@ -166,5 +173,18 @@ public class ListSongActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void beforeCallApi(Context context) {
+        // Set up progress before call
+        mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setMessage("Loading....");
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        // show it
+        mProgressDialog.show();
+    }
+
+    private void afterCallApi() {
+        mProgressDialog.dismiss();
     }
 }
