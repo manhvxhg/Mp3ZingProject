@@ -2,6 +2,7 @@ package com.example.manhnd16.mp3zingproject.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,11 +11,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.manhnd16.mp3zingproject.R;
 import com.example.manhnd16.mp3zingproject.adapter.AllPlaylistAdapter;
 import com.example.manhnd16.mp3zingproject.constant.Constant;
+import com.example.manhnd16.mp3zingproject.listener.RecyclerItemClickListener;
 import com.example.manhnd16.mp3zingproject.model.PlayList;
 import com.example.manhnd16.mp3zingproject.service.ApiService;
 import com.example.manhnd16.mp3zingproject.service.ServiceListener;
@@ -74,6 +78,19 @@ public class ViewAllPlaylistActivity extends AppCompatActivity {
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(ViewAllPlaylistActivity.this, 2);
                 mRecyclerView.setLayoutManager(gridLayoutManager);
                 mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.addOnItemTouchListener(
+                        new RecyclerItemClickListener(ViewAllPlaylistActivity.this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override public void onItemClick(View view, int position) {
+                                Intent intent = new Intent(ViewAllPlaylistActivity.this, ListSongActivity.class);
+                                intent.putExtra(Constant.INTENT_NAME_PLAYLIST, mPlayListArrayList.get(position));
+                                startActivity(intent);
+                            }
+
+                            @Override public void onLongItemClick(View view, int position) {
+                                // do whatever
+                            }
+                        })
+                );
                 afterCallApi();
             }
 
@@ -97,4 +114,5 @@ public class ViewAllPlaylistActivity extends AppCompatActivity {
     private void afterCallApi() {
         mProgressDialog.dismiss();
     }
+
 }
