@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.manhnd16.mp3zingproject.R;
+import com.example.manhnd16.mp3zingproject.activity.ListKindBySubjectActivity;
 import com.example.manhnd16.mp3zingproject.activity.ListSongActivity;
 import com.example.manhnd16.mp3zingproject.activity.ListSubjectActivity;
 import com.example.manhnd16.mp3zingproject.activity.ViewAllPlaylistActivity;
@@ -39,6 +40,7 @@ public class SubjectAndKindFragment extends Fragment implements View.OnClickList
     private HorizontalScrollView mHorizontalScrollView;
     private TextView mLoadmoreSubjectAndKind;
     ArrayList<Kind> kindArrayList;
+    ArrayList<Subject> subjectArrayList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,7 +59,6 @@ public class SubjectAndKindFragment extends Fragment implements View.OnClickList
             @Override
             public void onResponse(Call<KindAndSubject> call, Response<KindAndSubject> response) {
                 KindAndSubject kindAndSubject = response.body();
-                ArrayList<Subject> subjectArrayList = new ArrayList<>();
                 subjectArrayList = (ArrayList<Subject>) kindAndSubject.getSubject();
                 kindArrayList = (ArrayList<Kind>) kindAndSubject.getKind();
                 LinearLayout linearLayout = new LinearLayout(getActivity());
@@ -75,6 +76,15 @@ public class SubjectAndKindFragment extends Fragment implements View.OnClickList
                     cardView.setLayoutParams(layoutParams);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+                    final int position = i;
+                    cardView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getActivity(), ListKindBySubjectActivity.class);
+                            intent.putExtra(Constant.INTENT_NAME_KIND_BY_SUBJECT, subjectArrayList.get(position));
+                            startActivity(intent);
+                        }
+                    });
                 }
 
                 for (int j = 0; j < kindArrayList.size(); j++) {

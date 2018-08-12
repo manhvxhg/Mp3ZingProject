@@ -10,22 +10,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.manhnd16.mp3zingproject.R;
-import com.example.manhnd16.mp3zingproject.activity.ListKindBySubjectActivity;
 import com.example.manhnd16.mp3zingproject.activity.ListSongActivity;
 import com.example.manhnd16.mp3zingproject.constant.Constant;
+import com.example.manhnd16.mp3zingproject.model.Album;
 import com.example.manhnd16.mp3zingproject.model.Kind;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class KindsAdapter extends RecyclerView.Adapter<KindsAdapter.ViewHolder> {
+public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<Kind> mKindArrayList;
+    private ArrayList<Album> mAlbumArrayList;
 
-    public KindsAdapter(Context mContext, ArrayList<Kind> kindArrayList) {
+    public AlbumsAdapter(Context mContext, ArrayList<Album> albumArrayList) {
         this.mContext = mContext;
-        this.mKindArrayList = kindArrayList;
+        this.mAlbumArrayList = albumArrayList;
     }
 
     @Override
@@ -37,31 +37,31 @@ public class KindsAdapter extends RecyclerView.Adapter<KindsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Kind kind = mKindArrayList.get(position);
-        Picasso.with(mContext).load(kind.getKindImage()).into(holder.imgAvatar);
-        holder.txtKindName.setText(kind.getKindName());
+        Album album = mAlbumArrayList.get(position);
+        Picasso.with(mContext).load(album.getAlbumImage()).into(holder.imgAvatar);
+        holder.txtAlbumName.setText(album.getAlbumName());
     }
 
     @Override
     public int getItemCount() {
-        return mKindArrayList.size();
+        return mAlbumArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imgAvatar;
-        TextView txtKindName;
+        TextView txtAlbumName;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imgAvatar = itemView.findViewById(R.id.grid_avatar_imageview);
-            txtKindName = itemView.findViewById(R.id.grid_name_textview);
+            txtAlbumName = itemView.findViewById(R.id.grid_name_textview);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(mContext, ListSongActivity.class);
-            intent.putExtra(Constant.INTENT_NAME_SUBJECT_AND_KIND, mKindArrayList.get(getAdapterPosition()));
+            intent.putExtra(Constant.INTENT_NAME_ALBUM, mAlbumArrayList.get(getAdapterPosition()));
             mContext.startActivity(intent);
         }
     }

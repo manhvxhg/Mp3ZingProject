@@ -23,6 +23,7 @@ import com.example.manhnd16.mp3zingproject.R;
 import com.example.manhnd16.mp3zingproject.adapter.ListSongAdapter;
 import com.example.manhnd16.mp3zingproject.constant.Constant;
 import com.example.manhnd16.mp3zingproject.model.Advertisement;
+import com.example.manhnd16.mp3zingproject.model.Album;
 import com.example.manhnd16.mp3zingproject.model.Kind;
 import com.example.manhnd16.mp3zingproject.model.PlayList;
 import com.example.manhnd16.mp3zingproject.model.Song;
@@ -44,6 +45,7 @@ public class ListSongActivity extends AppCompatActivity {
     private Advertisement mAdvertisement;
     private PlayList mPlayList;
     private Kind mKind;
+    private Album mAlbum;
     private CoordinatorLayout mCoordinatorLayout;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private Toolbar mToolbar;
@@ -71,6 +73,10 @@ public class ListSongActivity extends AppCompatActivity {
         if (mKind != null) {
             setValueInitView(mKind.getKindName(), mKind.getKindImage());
             getDataKind(mKind.getKindId());
+        }
+        if (mAlbum != null) {
+            setValueInitView(mAlbum.getAlbumName(), mAlbum.getAlbumImage());
+            getDataAlbum(mAlbum.getAlbumId());
         }
     }
 
@@ -131,6 +137,10 @@ public class ListSongActivity extends AppCompatActivity {
 
             if (intent.hasExtra(Constant.INTENT_NAME_SUBJECT_AND_KIND)) {
                 mKind = (Kind) intent.getSerializableExtra(Constant.INTENT_NAME_SUBJECT_AND_KIND);
+            }
+
+            if (intent.hasExtra(Constant.INTENT_NAME_ALBUM)) {
+                mAlbum = (Album) intent.getSerializableExtra(Constant.INTENT_NAME_ALBUM);
             }
         }
     }
@@ -210,6 +220,30 @@ public class ListSongActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * get data album
+     * @param albumId
+     */
+    private void getDataAlbum(String albumId) {
+        ServiceListener serviceListener = ApiService.getService();
+        Call<List<Song>> callback = serviceListener.getListSongByAlbums(albumId);
+        beforeCallApi(ListSongActivity.this);
+        callback.enqueue(new Callback<List<Song>>() {
+            @Override
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                mSongArrayList = (ArrayList<Song>) response.body();
+                mAdapter = new ListSongAdapter(ListSongActivity.this, mSongArrayList);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
+                mRecyclerView.setAdapter(mAdapter);
+                afterCallApi();
+            }
+
+            @Override
+            public void onFailure(Call<List<Song>> call, Throwable t) {
+
+            }
+        });
+    }
 
     private void beforeCallApi(Context context) {
         // Set up progress before call

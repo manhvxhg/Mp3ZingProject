@@ -1,7 +1,10 @@
 package com.example.manhnd16.mp3zingproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.manhnd16.mp3zingproject.R;
+import com.example.manhnd16.mp3zingproject.activity.ListAllAlbumActivity;
+import com.example.manhnd16.mp3zingproject.activity.ListSongActivity;
+import com.example.manhnd16.mp3zingproject.constant.Constant;
 import com.example.manhnd16.mp3zingproject.model.Album;
 import com.squareup.picasso.Picasso;
 
@@ -50,11 +56,20 @@ public class AlbumHotAdapter extends RecyclerView.Adapter<AlbumHotAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView albumImage;
         TextView albumName, singerName;
+
         public ViewHolder(View itemView) {
             super(itemView);
             albumImage = itemView.findViewById(R.id.album_imageview);
             albumName = itemView.findViewById(R.id.album_name_textview);
             singerName = itemView.findViewById(R.id.singer_name_textview);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, ListSongActivity.class);
+                    intent.putExtra(Constant.INTENT_NAME_ALBUM, albumArrayList.get(getAdapterPosition()));
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
     }

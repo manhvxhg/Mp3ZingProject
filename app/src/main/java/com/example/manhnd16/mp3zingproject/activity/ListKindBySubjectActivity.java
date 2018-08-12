@@ -46,23 +46,25 @@ public class ListKindBySubjectActivity extends AppCompatActivity {
      */
     private void callKindApi() {
         ServiceListener serviceListener = ApiService.getService();
-        Call<List<Kind>> callback = serviceListener.getListKindBySubject(mSubject.getSubjectId());
-        beforeCallApi(ListKindBySubjectActivity.this);
-        callback.enqueue(new Callback<List<Kind>>() {
-            @Override
-            public void onResponse(Call<List<Kind>> call, Response<List<Kind>> response) {
-                mKindArrayList = (ArrayList<Kind>) response.body();
-                mKindAdapter = new KindsAdapter(ListKindBySubjectActivity.this, mKindArrayList);
-                mRecyclerView.setLayoutManager(new GridLayoutManager(ListKindBySubjectActivity.this, 2));
-                mRecyclerView.setAdapter(mKindAdapter);
-                afterCallApi();
-            }
+        if (mSubject != null) {
+            Call<List<Kind>> callback = serviceListener.getListKindBySubject(mSubject.getSubjectId());
+            beforeCallApi(ListKindBySubjectActivity.this);
+            callback.enqueue(new Callback<List<Kind>>() {
+                @Override
+                public void onResponse(Call<List<Kind>> call, Response<List<Kind>> response) {
+                    mKindArrayList = (ArrayList<Kind>) response.body();
+                    mKindAdapter = new KindsAdapter(ListKindBySubjectActivity.this, mKindArrayList);
+                    mRecyclerView.setLayoutManager(new GridLayoutManager(ListKindBySubjectActivity.this, 2));
+                    mRecyclerView.setAdapter(mKindAdapter);
+                    afterCallApi();
+                }
 
-            @Override
-            public void onFailure(Call<List<Kind>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<Kind>> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     /**

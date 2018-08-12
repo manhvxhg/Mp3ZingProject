@@ -10,4 +10,6 @@ public class Constant {
     public static final String TITLE_SUBJECTS = "Subjects";
     public static final String INTENT_NAME_KIND_BY_SUBJECT = "KindBySubject";
     public static final String TITLE_KINDS = "Kinds";
+    public static final String TITLE_ALBUMS = "Albums";
+    public static final String INTENT_NAME_ALBUM = "SongByAlbum";
 }

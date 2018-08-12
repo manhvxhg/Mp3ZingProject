@@ -1,5 +1,6 @@
 package com.example.manhnd16.mp3zingproject.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.manhnd16.mp3zingproject.R;
+import com.example.manhnd16.mp3zingproject.activity.ListAllAlbumActivity;
 import com.example.manhnd16.mp3zingproject.adapter.AlbumHotAdapter;
 import com.example.manhnd16.mp3zingproject.model.Album;
 import com.example.manhnd16.mp3zingproject.service.ApiService;
@@ -27,7 +29,7 @@ import retrofit2.Response;
  * Created by mac on 7/22/18.
  */
 
-public class AlbumHotFragment extends Fragment {
+public class AlbumHotFragment extends Fragment implements View.OnClickListener{
     private RecyclerView mRecyclerView;
     private TextView mAlbumTextView;
     private AlbumHotAdapter mAdapter;
@@ -38,6 +40,7 @@ public class AlbumHotFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.recycler_view_album_hot);
         mAlbumTextView = rootView.findViewById(R.id.album_hotloadmore_textview);
         getData();
+        mAlbumTextView.setOnClickListener(this);
         return rootView;
     }
 
@@ -60,5 +63,24 @@ public class AlbumHotFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.album_hotloadmore_textview:
+                onClickViewLoadMore();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * View all album
+     */
+    private void onClickViewLoadMore() {
+        Intent intent = new Intent(getActivity(), ListAllAlbumActivity.class);
+        startActivity(intent);
     }
 }

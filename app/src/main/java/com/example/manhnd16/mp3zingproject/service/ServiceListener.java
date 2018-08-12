@@ -48,6 +48,10 @@ public interface ServiceListener {
     @POST("listsongads.php")
     Call<List<Song>> getListSongByKindSubject(@Field("idKind") String idKind);
 
+    @FormUrlEncoded
+    @POST("listsongads.php")
+    Call<List<Song>> getListSongByAlbums(@Field("idAlbum") String idAlbum);
+
     @GET("allplaylist.php")
     Call<List<PlayList>> getDataAllPlaylist();
 
@@ -57,4 +61,7 @@ public interface ServiceListener {
     @FormUrlEncoded
     @POST("kindarraybysubject.php")
     Call<List<Kind>> getListKindBySubject(@Field("idSubject") String idSubject);
+
+    @GET("albums.php")
+    Call<List<Album>> getAlbums();
 }

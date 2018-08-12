@@ -1,6 +1,7 @@
 package com.example.manhnd16.mp3zingproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.manhnd16.mp3zingproject.R;
+import com.example.manhnd16.mp3zingproject.activity.ListSongActivity;
+import com.example.manhnd16.mp3zingproject.constant.Constant;
 import com.example.manhnd16.mp3zingproject.model.Song;
 import com.squareup.picasso.Picasso;
 
@@ -43,7 +46,7 @@ public class SongHotAdapter extends RecyclerView.Adapter<SongHotAdapter.SongView
         return songArrayList.size();
     }
 
-    public class SongViewHolder extends RecyclerView.ViewHolder {
+    public class SongViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView songImage, favouriteImage;
         TextView songName, singerName;
         public SongViewHolder(View itemView) {
@@ -52,6 +55,12 @@ public class SongHotAdapter extends RecyclerView.Adapter<SongHotAdapter.SongView
             singerName = itemView.findViewById(R.id.singer_name_song_hot_textview);
             songImage = itemView.findViewById(R.id.image_song_hot_imageview);
             favouriteImage = itemView.findViewById(R.id.favourite_imageview);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 }

@@ -6,7 +6,9 @@
     android:layout_gravity="center"
     android:layout_marginRight="@dimen/dp_10"
     android:layout_marginLeft="@dimen/dp_10"
-    app:cardCornerRadius="@dimen/dp_10">
+    app:cardCornerRadius="@dimen/dp_10"
+    android:id="@+id/album_row_card_view"
+    >
     <LinearLayout
         android:id="@+id/album_hot_cardview_linearlayout"
         android:layout_width="wrap_content"
@@ -19,6 +21,7 @@
             android:scaleType="fitXY"
             android:layout_width="@dimen/dp_200"
             android:layout_height="@dimen/dp_200"
+            android:clickable="false"
             />
         <TextView
             android:maxWidth="@dimen/dp_200"

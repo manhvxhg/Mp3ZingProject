@@ -7,7 +7,9 @@ package com.example.manhnd16.mp3zingproject.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Album {
+import java.io.Serializable;
+
+public class Album implements Serializable{
 
     @SerializedName("album_id")
     @Expose
