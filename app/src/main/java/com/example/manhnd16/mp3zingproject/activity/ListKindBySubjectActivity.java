@@ -12,8 +12,6 @@ import android.view.View;
 
 import com.example.manhnd16.mp3zingproject.R;
 import com.example.manhnd16.mp3zingproject.adapter.KindsAdapter;
-import com.example.manhnd16.mp3zingproject.adapter.PlaylistAdapter;
-import com.example.manhnd16.mp3zingproject.adapter.SubjectsAdapter;
 import com.example.manhnd16.mp3zingproject.constant.Constant;
 import com.example.manhnd16.mp3zingproject.model.Kind;
 import com.example.manhnd16.mp3zingproject.model.Subject;
