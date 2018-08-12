@@ -6,7 +6,9 @@ package com.example.manhnd16.mp3zingproject.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Kind {
+import java.io.Serializable;
+
+public class Kind implements Serializable{
 
     @SerializedName("kind_id")
     @Expose

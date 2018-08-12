@@ -7,7 +7,9 @@ package com.example.manhnd16.mp3zingproject.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Subject {
+import java.io.Serializable;
+
+public class Subject implements Serializable {
 
     @SerializedName("subject_id")
     @Expose
@@ -30,6 +32,7 @@ public class Subject {
     public String getSubjectName() {
         return subjectName;
     }
+
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
     }

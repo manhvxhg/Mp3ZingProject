@@ -1,5 +1,6 @@
 package com.example.manhnd16.mp3zingproject.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.manhnd16.mp3zingproject.R;
+import com.example.manhnd16.mp3zingproject.activity.ListSongActivity;
+import com.example.manhnd16.mp3zingproject.activity.ListSubjectActivity;
+import com.example.manhnd16.mp3zingproject.activity.ViewAllPlaylistActivity;
+import com.example.manhnd16.mp3zingproject.constant.Constant;
 import com.example.manhnd16.mp3zingproject.model.Kind;
 import com.example.manhnd16.mp3zingproject.model.KindAndSubject;
 import com.example.manhnd16.mp3zingproject.model.Subject;
@@ -33,6 +38,7 @@ import retrofit2.Response;
 public class SubjectAndKindFragment extends Fragment implements View.OnClickListener{
     private HorizontalScrollView mHorizontalScrollView;
     private TextView mLoadmoreSubjectAndKind;
+    ArrayList<Kind> kindArrayList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,10 +59,7 @@ public class SubjectAndKindFragment extends Fragment implements View.OnClickList
                 KindAndSubject kindAndSubject = response.body();
                 ArrayList<Subject> subjectArrayList = new ArrayList<>();
                 subjectArrayList = (ArrayList<Subject>) kindAndSubject.getSubject();
-
-                ArrayList<Kind> kindArrayList = new ArrayList<>();
                 kindArrayList = (ArrayList<Kind>) kindAndSubject.getKind();
-
                 LinearLayout linearLayout = new LinearLayout(getActivity());
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(580, 250);
@@ -85,8 +88,18 @@ public class SubjectAndKindFragment extends Fragment implements View.OnClickList
                     cardView.setLayoutParams(layoutParams);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+                    final int position = j;
+                    cardView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getActivity(), ListSongActivity.class);
+                            intent.putExtra(Constant.INTENT_NAME_SUBJECT_AND_KIND, kindArrayList.get(position));
+                            startActivity(intent);
+                        }
+                    });
                 }
                 mHorizontalScrollView.addView(linearLayout);
+
             }
 
             @Override
@@ -100,6 +113,8 @@ public class SubjectAndKindFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loadmore_subject_and_kind_textview:
+                Intent intent = new Intent(getActivity(), ListSubjectActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

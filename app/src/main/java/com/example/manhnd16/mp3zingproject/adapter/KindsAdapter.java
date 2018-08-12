@@ -9,19 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.manhnd16.mp3zingproject.R;
-import com.example.manhnd16.mp3zingproject.model.PlayList;
+import com.example.manhnd16.mp3zingproject.model.Kind;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class AllPlaylistAdapter extends RecyclerView.Adapter<AllPlaylistAdapter.ViewHolder> {
+public class KindsAdapter extends RecyclerView.Adapter<KindsAdapter.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<PlayList> mPlayListArrayList;
+    private ArrayList<Kind> mKindArrayList;
 
-    public AllPlaylistAdapter(Context mContext, ArrayList<PlayList> mPlayListArrayList) {
+    public KindsAdapter(Context mContext, ArrayList<Kind> kindArrayList) {
         this.mContext = mContext;
-        this.mPlayListArrayList = mPlayListArrayList;
+        this.mKindArrayList = kindArrayList;
     }
 
     @Override
@@ -33,24 +33,24 @@ public class AllPlaylistAdapter extends RecyclerView.Adapter<AllPlaylistAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        PlayList playList = mPlayListArrayList.get(position);
-        Picasso.with(mContext).load(playList.getPlaylistImage()).into(holder.imgAvatar);
-        holder.txtPlaylistName.setText(playList.getPlaylistName());
+        Kind kind = mKindArrayList.get(position);
+        Picasso.with(mContext).load(kind.getKindImage()).into(holder.imgAvatar);
+        holder.txtKindName.setText(kind.getKindName());
     }
 
     @Override
     public int getItemCount() {
-        return mPlayListArrayList.size();
+        return mKindArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgAvatar;
-        TextView txtPlaylistName;
+        TextView txtKindName;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imgAvatar = itemView.findViewById(R.id.grid_avatar_imageview);
-            txtPlaylistName = itemView.findViewById(R.id.grid_name_textview);
+            txtKindName = itemView.findViewById(R.id.grid_name_textview);
         }
     }
 }

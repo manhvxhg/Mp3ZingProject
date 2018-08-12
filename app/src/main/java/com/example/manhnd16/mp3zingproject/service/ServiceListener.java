@@ -2,9 +2,11 @@ package com.example.manhnd16.mp3zingproject.service;
 
 import com.example.manhnd16.mp3zingproject.model.Advertisement;
 import com.example.manhnd16.mp3zingproject.model.Album;
+import com.example.manhnd16.mp3zingproject.model.Kind;
 import com.example.manhnd16.mp3zingproject.model.KindAndSubject;
 import com.example.manhnd16.mp3zingproject.model.PlayList;
 import com.example.manhnd16.mp3zingproject.model.Song;
+import com.example.manhnd16.mp3zingproject.model.Subject;
 
 import java.util.List;
 
@@ -42,6 +44,17 @@ public interface ServiceListener {
     @POST("listsongads.php")
     Call<List<Song>> getListSongByPlaylist(@Field("idPlaylist") String idPlaylist);
 
+    @FormUrlEncoded
+    @POST("listsongads.php")
+    Call<List<Song>> getListSongByKindSubject(@Field("idKind") String idKind);
+
     @GET("allplaylist.php")
     Call<List<PlayList>> getDataAllPlaylist();
+
+    @GET("allsubject.php")
+    Call<List<Subject>> getSubjects();
+
+    @FormUrlEncoded
+    @POST("kindarraybysubject.php")
+    Call<List<Kind>> getListKindBySubject(@Field("idSubject") String idSubject);
 }

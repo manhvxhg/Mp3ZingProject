@@ -6,19 +6,19 @@
     android:orientation="vertical"
     >
     <FrameLayout
-        android:id="@+id/all_playlist_framelayout"
+        android:id="@+id/grid_framelayout"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/all_playlist_imageview"
+            android:id="@+id/grid_avatar_imageview"
             android:src="@mipmap/ic_launcher"
             android:layout_width="@dimen/dp_180"
             android:layout_height="@dimen/dp_180"
             android:scaleType="centerCrop"/>
     </FrameLayout>
     <TextView
-        android:id="@+id/all_playlist_name_playlist_textview"
+        android:id="@+id/grid_name_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -31,7 +31,7 @@
         android:textSize="@dimen/sp_15"
         />
     <TextView
-        android:id="@+id/all_playlist_name_various"
+        android:id="@+id/grid_name_various"
         android:textSize="@dimen/sp_13"
         android:text="Various Artist"
         android:layout_width="wrap_content"

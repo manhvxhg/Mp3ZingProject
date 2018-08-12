@@ -6,4 +6,8 @@ public class Constant {
     public static final String INTENT_NAME_BANNER = "banner";
     public static final String INTENT_NAME_PLAYLIST = "playlist";
     public static final String TITLE_PLAYLISTS = "Playlists";
+    public static final String INTENT_NAME_SUBJECT_AND_KIND = "Subject&Kind";
+    public static final String TITLE_SUBJECTS = "Subjects";
+    public static final String INTENT_NAME_KIND_BY_SUBJECT = "KindBySubject";
+    public static final String TITLE_KINDS = "Kinds";
 }
