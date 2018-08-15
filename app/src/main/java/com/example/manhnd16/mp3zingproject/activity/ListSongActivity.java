@@ -41,7 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListSongActivity extends AppCompatActivity {
+public class ListSongActivity extends AppCompatActivity implements View.OnClickListener{
     private Advertisement mAdvertisement;
     private PlayList mPlayList;
     private Kind mKind;
@@ -91,6 +91,7 @@ public class ListSongActivity extends AppCompatActivity {
         });
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        mFloatingActionButton.setEnabled(false);
     }
 
     private void setValueInitView(String name, String image) {
@@ -145,6 +146,11 @@ public class ListSongActivity extends AppCompatActivity {
         }
     }
 
+    private void eventClick() {
+        mFloatingActionButton.setEnabled(true);
+        mFloatingActionButton.setOnClickListener(this);
+    }
+
     /**
      * get data play list id
      * @param playlistId
@@ -160,6 +166,7 @@ public class ListSongActivity extends AppCompatActivity {
                 mAdapter = new ListSongAdapter(ListSongActivity.this, mSongArrayList);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
                 mRecyclerView.setAdapter(mAdapter);
+                eventClick();
                 afterCallApi();
             }
 
@@ -185,6 +192,7 @@ public class ListSongActivity extends AppCompatActivity {
                 mAdapter = new ListSongAdapter(ListSongActivity.this, mSongArrayList);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
                 mRecyclerView.setAdapter(mAdapter);
+                eventClick();
                 afterCallApi();
             }
 
@@ -210,6 +218,7 @@ public class ListSongActivity extends AppCompatActivity {
                 mAdapter = new ListSongAdapter(ListSongActivity.this, mSongArrayList);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
                 mRecyclerView.setAdapter(mAdapter);
+                eventClick();
                 afterCallApi();
             }
 
@@ -235,6 +244,7 @@ public class ListSongActivity extends AppCompatActivity {
                 mAdapter = new ListSongAdapter(ListSongActivity.this, mSongArrayList);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
                 mRecyclerView.setAdapter(mAdapter);
+                eventClick();
                 afterCallApi();
             }
 
@@ -256,5 +266,16 @@ public class ListSongActivity extends AppCompatActivity {
 
     private void afterCallApi() {
         mProgressDialog.dismiss();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.list_song_floating_action_button :
+                Intent intent = new Intent(ListSongActivity.this, PlayMusicActivity.class);
+                intent.putExtra(Constant.INTENT_LIST_SONG, mSongArrayList);
+                startActivity(intent);
+                break;
+        }
     }
 }

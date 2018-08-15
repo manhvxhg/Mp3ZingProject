@@ -1,9 +1,14 @@
 package com.example.manhnd16.mp3zingproject.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Parcelable{
 
     @SerializedName("song_id")
     @Expose
@@ -23,6 +28,27 @@ public class Song {
     @SerializedName("like_count")
     @Expose
     private String likeCount;
+
+    protected Song(Parcel in) {
+        songId = in.readString();
+        songName = in.readString();
+        songImage = in.readString();
+        singerName = in.readString();
+        linkSong = in.readString();
+        likeCount = in.readString();
+    }
+
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
 
     public String getSongId() {
         return songId;
@@ -72,4 +98,18 @@ public class Song {
         this.likeCount = likeCount;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(songId);
+        parcel.writeString(songName);
+        parcel.writeString(songImage);
+        parcel.writeString(singerName);
+        parcel.writeString(linkSong);
+        parcel.writeString(likeCount);
+    }
 }

@@ -22,7 +22,8 @@
         <activity android:name=".activity.ViewAllPlaylistActivity" />
         <activity android:name=".activity.ListSubjectActivity" />
         <activity android:name=".activity.ListKindBySubjectActivity" />
-        <activity android:name=".activity.ListAllAlbumActivity"></activity>
+        <activity android:name=".activity.ListAllAlbumActivity" />
+        <activity android:name=".activity.PlayMusicActivity"></activity>
     </application>
 
 </manifest>

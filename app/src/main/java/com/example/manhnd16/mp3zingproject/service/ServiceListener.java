@@ -64,4 +64,8 @@ public interface ServiceListener {
 
     @GET("albums.php")
     Call<List<Album>> getAlbums();
+
+    @FormUrlEncoded
+    @POST("updatecountlike.php")
+    Call<String> updateLikeCount(@Field("countLike") String countLike, @Field("idSong") String idSong);
 }

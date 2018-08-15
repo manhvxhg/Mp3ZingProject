@@ -12,4 +12,9 @@ public class Constant {
     public static final String TITLE_KINDS = "Kinds";
     public static final String TITLE_ALBUMS = "Albums";
     public static final String INTENT_NAME_ALBUM = "SongByAlbum";
+
+    public static final String SUCCESS = "Success";
+    public static final String FAIL = "Fail";
+    public static final String INTENT_SONG = "song";
+    public static final String INTENT_LIST_SONG = "listsong";
 }
