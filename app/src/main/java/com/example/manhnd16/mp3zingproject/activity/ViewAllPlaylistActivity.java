@@ -14,6 +14,9 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.example.manhnd16.mp3zingproject.R;
 import com.example.manhnd16.mp3zingproject.adapter.AllPlaylistAdapter;
@@ -36,6 +39,7 @@ public class ViewAllPlaylistActivity extends AppCompatActivity {
     private ArrayList<PlayList> mPlayListArrayList;
     private AllPlaylistAdapter mAdapter;
     private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,7 @@ public class ViewAllPlaylistActivity extends AppCompatActivity {
     private void referView() {
         mToolbar = findViewById(R.id.all_playlist_toolbar);
         mRecyclerView = findViewById(R.id.all_playlist_recycler_view);
+
     }
 
     private void initView() {

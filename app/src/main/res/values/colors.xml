@@ -16,4 +16,5 @@
     <color name="colorFloatingButton">#a845de</color>
     <color name="colorSingerListSong">#979797</color>
     <color name="colorSongListSong">#030303</color>
+    <color name="colorPlayMusicIndex">#FFFF</color>
 </resources>
