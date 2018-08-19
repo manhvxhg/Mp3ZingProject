@@ -68,4 +68,8 @@ public interface ServiceListener {
     @FormUrlEncoded
     @POST("updatecountlike.php")
     Call<String> updateLikeCount(@Field("countLike") String countLike, @Field("idSong") String idSong);
+
+    @FormUrlEncoded
+    @POST("searchsong.php")
+    Call<List<Song>> getSearchSong(@Field("keyword") String keyword);
 }

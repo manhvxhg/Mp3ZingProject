@@ -17,4 +17,6 @@
     <color name="colorSingerListSong">#979797</color>
     <color name="colorSongListSong">#030303</color>
     <color name="colorPlayMusicIndex">#FFFF</color>
+    <color name="colorNotResult">#F20</color>
+    <color name="colorSongNameSearchItem">#0a0a0a</color>
 </resources>

@@ -47,6 +47,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
     private int mPosition = 0;
     private boolean isRepeat = false;
     private boolean isRandom = false;
+    private boolean isNext = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +226,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
                 new PlayMp3().execute(mSongArrayList.get(mPosition).getLinkSong());
                 mDiscsFragment.playSong(mSongArrayList.get(mPosition).getSongImage());
                 getSupportActionBar().setTitle(mSongArrayList.get(mPosition).getSongName());
+                updateTime();
             }
             mPreviewBtn.setClickable(false);
             mNextBtn.setClickable(false);
@@ -273,11 +275,12 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
                 new PlayMp3().execute(mSongArrayList.get(mPosition).getLinkSong());
                 mDiscsFragment.playSong(mSongArrayList.get(mPosition).getSongImage());
                 getSupportActionBar().setTitle(mSongArrayList.get(mPosition).getSongName());
+                updateTime();
             }
             mPreviewBtn.setClickable(false);
             mNextBtn.setClickable(false);
-            Handler handler1 = new Handler();
-            handler1.postDelayed(new Runnable() {
+            Handler handler2 = new Handler();
+            handler2.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     mPreviewBtn.setClickable(true);
@@ -336,6 +339,85 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    private void updateTime() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mMediaPlayer != null) {
+                    mSeekBar.setProgress(mMediaPlayer.getCurrentPosition());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+                    mTimeSong.setText(simpleDateFormat.format(mMediaPlayer.getCurrentPosition()));
+                    handler.postDelayed(this, 300);
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            isNext = true;
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        }, 300);
+        final Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isNext) {
+                    if (mSongArrayList != null) {
+                        if (mMediaPlayer.isPlaying() || mMediaPlayer != null) {
+                            mMediaPlayer.stop();
+                            mMediaPlayer.release();
+                            mMediaPlayer = null;
+                        }
+                        if (mPosition < mSongArrayList.size()) {
+                            mPlayBtn.setImageResource(R.drawable.iconpause);
+                            mPosition++;
+                            if (isRepeat) {
+                                if (mPosition == 0) {
+                                    mPosition = mSongArrayList.size();
+                                }
+                                mPosition -= 1;
+                            }
+                            if (isRandom) {
+                                Random random = new Random();
+                                int index = random.nextInt(mSongArrayList.size());
+                                if (index == mPosition) {
+                                    mPosition = index - 1;
+                                }
+                                mPosition = index;
+                            }
+                            if (mPosition > mSongArrayList.size() - 1) {
+                                mPosition = 0;
+                            }
+                            new PlayMp3().execute(mSongArrayList.get(mPosition).getLinkSong());
+                            mDiscsFragment.playSong(mSongArrayList.get(mPosition).getSongImage());
+                            getSupportActionBar().setTitle(mSongArrayList.get(mPosition).getSongName());
+                        }
+                        mPreviewBtn.setClickable(false);
+                        mNextBtn.setClickable(false);
+                        Handler handler2 = new Handler();
+                        handler2.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mPreviewBtn.setClickable(true);
+                                mNextBtn.setClickable(true);
+                            }
+                        }, 3000);
+                        isNext = false;
+                        handler1.removeCallbacks(this);
+                    }
+                } else {
+                    handler1.postDelayed(this, 1000);
+                }
+            }
+        }, 1000);
+    }
+
     class PlayMp3 extends AsyncTask<String, Void, String> {
         @Override
         protected void onPostExecute(String song) {
@@ -357,6 +439,7 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
             }
             mMediaPlayer.start();
             timeSong();
+            updateTime();
         }
 
         @Override

@@ -11,4 +11,5 @@
     <string name="loadmore_title_subject_and_kind">Xem thêm</string>
     <string name="album_hot_title">ALBUM HOT</string>
     <string name="song_hot_title">CÓ THỂ BẠN THÍCH</string>
+    <string name="not_data">No results were found</string>
 </resources>
